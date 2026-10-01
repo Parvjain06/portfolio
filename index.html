@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Parv Jain — Data Science</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          grass:  '#10291b',   // grass-court green (canvas)
+          grassd: '#0b2015',   // deeper green (cards)
+          grassr: '#1a3d29',   // raised green
+          ball:   '#d4ff33',   // optic yellow (accent)
+          balld:  '#b6e01f',   // optic yellow, darker (hover)
+          clay:   '#e0703a',   // clay-court orange (tertiary)
+          line:   'rgba(255,255,255,0.15)',
+          ink:    '#edf7e9',
+          muted:  '#a2c1ad',
+        },
+        fontFamily: {
+          display: ['"Bricolage Grotesque"', 'system-ui', 'sans-serif'],
+          body:    ['Inter', 'system-ui', 'sans-serif'],
+          score:   ['"Space Mono"', 'ui-monospace', 'monospace'],
+        },
+        keyframes: {
+          bar:   { '0%,100%': { transform: 'scaleX(0.92)' }, '50%': { transform: 'scaleX(1)' } },
+          dot:   { '0%,100%': { opacity: '1' }, '50%': { opacity: '0.25' } },
+          serve: { '0%': { transform: 'translateY(0) rotate(0)' }, '30%': { transform: 'translateY(-10px) rotate(120deg)' }, '60%': { transform: 'translateY(0) rotate(240deg)' }, '100%': { transform: 'translateY(0) rotate(360deg)' } },
+        },
+        animation: {
+          dot:   'dot 1.6s ease-in-out infinite',
+          serve: 'serve 2.6s ease-in-out infinite',
+        },
+      },
+    },
+  };
+</script>
+<style>
+  :root {
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  html { scroll-behavior: smooth; scroll-padding-top: 96px; }
+  body { overflow-x: clip; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    #ball-track { display: none; }
+  }
+  h1, h2, h3 { font-family: '"Bricolage Grotesque"', system-ui, sans-serif; }
+  :focus-visible { outline: 3px solid #d4ff33; outline-offset: 3px; border-radius: 4px; }
+  /* white court-line divider */
+  .courtline { height: 2px; background: repeating-linear-gradient(90deg,rgba(255,255,255,.24) 0 24px,transparent 24px 36px); }
+  /* tennis ball with felt seam */
+  .felt { position: relative; border-radius: 9999px; background: #d4ff33; }
+  .felt::before, .felt::after {
+    content:''; position:absolute; inset:0; border-radius:9999px;
+    border: 1.5px solid rgba(16,41,27,.55); border-left-color:transparent; border-right-color:transparent;
+  }
+  .felt::before { transform: rotate(28deg) scaleX(.55); }
+  .felt::after  { transform: rotate(-28deg) scaleX(.55); }
+</style>
+</head>
+<body class="bg-grass text-ink font-body antialiased">
+
+  <!-- SCROLL BASELINE + ROLLING TENNIS BALL -->
+  <div id="ball-track" class="fixed top-0 left-0 right-0 z-[60] pointer-events-none">
+    <div class="courtline"></div>
+    <div id="ball" class="felt w-4 h-4 -mt-[9px] shadow-[0_0_10px_rgba(212,255,51,.6)]" style="margin-left:0"></div>
+  </div>
+
+  <!-- NAV -->
+  <nav id="nav" class="sticky top-0 z-50 transition-shadow">
+    <div class="max-w-[1180px] mx-auto px-5 sm:px-8 lg:px-12 flex items-center justify-between py-3.5">
+      <a href="#top" class="font-display font-extrabold text-xl tracking-tight text-ink no-underline">
+        Parv<span class="text-ball">.</span>
+      </a>
+      <div class="flex items-center gap-4 sm:gap-7">
+        <a href="#about"    class="hidden sm:inline text-muted hover:text-ink font-semibold text-sm no-underline transition-colors">About</a>
+        <a href="#skills"   class="hidden sm:inline text-muted hover:text-ink font-semibold text-sm no-underline transition-colors">Skills</a>
+        <a href="#projects" class="hidden sm:inline text-muted hover:text-ink font-semibold text-sm no-underline transition-colors">Projects</a>
+        <a href="#contact"  class="hidden sm:inline text-muted hover:text-ink font-semibold text-sm no-underline transition-colors">Contact</a>
+        <!-- TODO: drop your resume at /resume.pdf, then point this there -->
+        <a href="#contact" class="inline-flex items-center gap-2 bg-ball hover:bg-balld text-grassd font-bold text-sm px-4 py-2 rounded-full no-underline transition-colors">Résumé</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="top" class="max-w-[1180px] mx-auto px-5 sm:px-8 lg:px-12">
+
+    <!-- HERO -->
+    <section class="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-14 items-center pt-12 lg:pt-20 pb-14 lg:pb-24">
+      <div>
+        <div class="inline-flex items-center gap-2 font-score text-[11px] tracking-widest text-ball mb-6 border border-line rounded-full px-3 py-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-ball animate-dot"></span>
+          SET 1 · NOW SERVING
+        </div>
+        <p class="font-score text-sm text-muted mb-3">Data Science Student · NMIMS Mumbai</p>
+        <h1 class="font-display font-extrabold text-[clamp(3rem,13vw,8.5rem)] leading-[0.92] tracking-tight mb-4 break-words">Parv Jain</h1>
+        <p class="font-display font-bold text-2xl sm:text-3xl text-ball mb-6 flex items-center gap-3">
+          Serving data science
+          <span class="felt inline-block w-5 h-5 align-middle animate-serve"></span>
+        </p>
+        <p class="text-lg sm:text-xl leading-relaxed text-ink/90 max-w-[48ch] mb-9">
+          Raw data is useless until you can turn it into decisions. I build end-to-end
+          machine-learning systems — from crime forecasting to sentiment engines — that
+          answer the question a dashboard actually gets asked: <span class="text-ball font-semibold">so what do we do now?</span>
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <a href="#projects" class="inline-flex items-center gap-2 bg-ball hover:bg-balld text-grassd font-bold px-6 py-3.5 rounded-full no-underline transition-colors">See the work</a>
+          <a href="#contact"  class="inline-flex items-center gap-2 border border-line hover:border-ball/60 text-ink font-semibold px-6 py-3.5 rounded-full no-underline transition-colors">Get in touch</a>
+        </div>
+      </div>
+
+      <!-- HERO PANEL: model showdown as a tennis scoreboard -->
+      <div class="bg-grassd border border-line rounded-3xl p-6 sm:p-7 shadow-2xl shadow-black/30">
+        <div class="flex items-center justify-between mb-1">
+          <span class="font-score text-xs tracking-wider text-muted">MATCH · MODEL SHOWDOWN</span>
+          <span class="inline-flex items-center gap-1.5 font-score text-[10px] text-ball">
+            <span class="w-1.5 h-1.5 rounded-full bg-ball animate-dot"></span>FINAL
+          </span>
+        </div>
+        <p class="font-score text-[10px] text-muted mb-5">Crime-forecasting bracket · accuracy = score</p>
+
+        <!-- scoreboard rows -->
+        <div class="space-y-2.5">
+          <div class="flex items-center gap-3">
+            <span class="w-28 shrink-0 font-score text-xs text-muted">Prophet</span>
+            <div class="flex-1 h-2 rounded-full bg-white/10 overflow-hidden">
+              <div class="h-full bg-grassr origin-left rounded-full" style="width:37%;animation:bar 2.6s ease-in-out infinite"></div>
+            </div>
+            <span class="w-12 text-right font-score text-xs text-muted">36.9</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="w-28 shrink-0 font-score text-xs text-muted">NeuralProphet</span>
+            <div class="flex-1 h-2 rounded-full bg-white/10 overflow-hidden">
+              <div class="h-full bg-grassr origin-left rounded-full" style="width:61%;animation:bar 2.3s ease-in-out infinite .15s"></div>
+            </div>
+            <span class="w-12 text-right font-score text-xs text-muted">61.4</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="w-28 shrink-0 font-score text-xs text-muted">SVM</span>
+            <div class="flex-1 h-2 rounded-full bg-white/10 overflow-hidden">
+              <div class="h-full bg-clay origin-left rounded-full" style="width:82%;animation:bar 2.8s ease-in-out infinite .1s"></div>
+            </div>
+            <span class="w-12 text-right font-score text-xs text-muted">82.5</span>
+          </div>
+          <!-- winner -->
+          <div class="flex items-center gap-3 bg-ball/10 border border-ball/30 rounded-xl px-2.5 py-2 -mx-2.5">
+            <span class="w-28 shrink-0 font-score text-xs text-ball font-bold flex items-center gap-1.5">
+              <span class="felt inline-block w-3 h-3"></span>LSTM
+            </span>
+            <div class="flex-1 h-2 rounded-full bg-white/10 overflow-hidden">
+              <div class="h-full bg-ball origin-left rounded-full" style="width:94%;animation:bar 2.5s ease-in-out infinite .25s"></div>
+            </div>
+            <span class="w-12 text-right font-score text-xs text-ball font-bold">93.8</span>
+          </div>
+        </div>
+
+        <div class="courtline my-4"></div>
+        <div class="flex items-center justify-between">
+          <span class="font-score text-[10px] text-muted">705 districts · 25 crimes · 2014–22</span>
+          <span class="font-score text-[10px] text-ball font-bold">LSTM · GAME</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="courtline mb-2"></div>
+
+    <!-- ABOUT -->
+    <section id="about" class="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-10 lg:gap-16 items-center py-16 lg:py-20">
+      <div>
+        <div class="font-score text-xs tracking-widest text-ball mb-4">15 · ABOUT</div>
+        <h2 class="font-display font-bold text-3xl sm:text-5xl mb-5">The player behind the model</h2>
+        <p class="text-[17px] leading-relaxed text-ink/85 max-w-[64ch] mb-4">
+          I'm a Data Science student at NMIMS Mumbai who cares less about chasing accuracy
+          scores and more about the moment a messy spreadsheet becomes a decision someone
+          can act on. Most of my projects are end-to-end: I'll run a full model showdown,
+          fight the data-cleaning battles nobody posts about, then wrap it in something a
+          non-technical person can actually use.
+        </p>
+        <p class="text-[17px] leading-relaxed text-ink/85 max-w-[64ch]">
+          Off the screen, I play tennis — which is probably why I think about problems as
+          rallies: set it up, read the pattern, commit to the shot. <span class="text-muted">(Rewrite this in your own voice — it's a strong starting draft, but the creativity marks want <em>you</em>.)</span>
+        </p>
+      </div>
+      <div class="relative rounded-3xl aspect-[4/5] bg-grassd border-2 border-line p-2.5">
+        <div class="w-full h-full rounded-2xl border border-dashed border-white/20 flex items-center justify-center">
+          <span class="text-muted text-sm font-score text-center px-6">Drop a photo<br>of yourself here</span>
+        </div>
+        <span class="absolute -top-2 -left-2 w-5 h-5 border-t-2 border-l-2 border-ball rounded-tl-lg"></span>
+        <span class="absolute -bottom-2 -right-2 w-5 h-5 border-b-2 border-r-2 border-ball rounded-br-lg"></span>
+      </div>
+    </section>
+
+    <div class="courtline my-2"></div>
+
+    <!-- SKILLS -->
+    <section id="skills" class="py-16 lg:py-20">
+      <div class="font-score text-xs tracking-widest text-ball mb-4">30 · SKILLS</div>
+      <h2 class="font-display font-bold text-3xl sm:text-5xl mb-10">What's in the kit bag</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div>
+          <h3 class="font-display font-bold text-lg mb-4">Languages</h3>
+          <div class="flex flex-wrap gap-2"><span class="chip">Python</span><span class="chip">SQL</span></div>
+        </div>
+        <div>
+          <h3 class="font-display font-bold text-lg mb-4">ML / Deep Learning</h3>
+          <div class="flex flex-wrap gap-2"><span class="chip">scikit-learn</span><span class="chip">PyTorch</span><span class="chip">Hugging Face</span><span class="chip">RoBERTa</span><span class="chip">LSTM</span></div>
+        </div>
+        <div>
+          <h3 class="font-display font-bold text-lg mb-4">Data &amp; Apps</h3>
+          <div class="flex flex-wrap gap-2"><span class="chip">pandas</span><span class="chip">NumPy</span><span class="chip">Matplotlib</span><span class="chip">Streamlit</span></div>
+        </div>
+        <div>
+          <h3 class="font-display font-bold text-lg mb-4">Tools</h3>
+          <div class="flex flex-wrap gap-2"><span class="chip">Jupyter</span><span class="chip">Git</span><span class="chip">Groq / LLaMA</span></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="courtline my-2"></div>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="py-16 lg:py-20">
+      <div class="font-score text-xs tracking-widest text-ball mb-4">40 · PROJECTS</div>
+      <h2 class="font-display font-bold text-3xl sm:text-5xl mb-10">Things I've built</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+        <!-- SentIQ -->
+        <article class="bg-grassd border border-line rounded-3xl p-7 flex flex-col gap-4 transition-all duration-200 hover:-translate-y-1.5 hover:border-ball/50 hover:shadow-xl hover:shadow-black/30">
+          <div class="flex items-center justify-between">
+            <span class="chip-ball">NLP · Dashboard</span>
+            <span class="font-score text-[11px] text-ball font-bold">87.6% · 0.88 F1</span>
+          </div>
+          <h3 class="font-display font-bold text-2xl">SentIQ — AI Market Research Dashboard</h3>
+          <p class="text-sm text-ink/80 leading-relaxed"><span class="text-muted font-semibold">Problem.</span> Thousands of chaotic customer reviews are worthless until a business can act on them.</p>
+          <p class="text-sm text-ink/80 leading-relaxed"><span class="text-muted font-semibold">Approach.</span> A model showdown (SVM vs BERT vs RoBERTa) + aspect-based sentiment with DeBERTa-v3, and a Groq-powered LLaMA 3.3 70B assistant that writes grounded executive summaries. Built in Streamlit.</p>
+          <p class="text-sm font-semibold text-ball leading-relaxed">Result. RoBERTa won at 87.6% accuracy; ships one-click AI reports, aspect breakdowns, and side-by-side model charts.</p>
+          <div class="flex gap-2.5 mt-auto pt-1">
+            <a href="https://github.com/Parvjain06/ai-market-research-dashboard" target="_blank" rel="noopener" class="btn-sec">GitHub</a>
+            <a href="https://ai-market-research-dashboard-hju8skkacvqfxv3n8k8ddy.streamlit.app/" target="_blank" rel="noopener" class="btn-ghost">Live dashboard</a>
+          </div>
+        </article>
+
+        <!-- Crime -->
+        <article class="bg-grassd border border-line rounded-3xl p-7 flex flex-col gap-4 transition-all duration-200 hover:-translate-y-1.5 hover:border-ball/50 hover:shadow-xl hover:shadow-black/30">
+          <div class="flex items-center justify-between">
+            <span class="chip-clay">Time-Series · Research</span>
+            <span class="font-score text-[11px] text-ball font-bold">93.8% · LSTM</span>
+          </div>
+          <h3 class="font-display font-bold text-2xl">Predictive Policing in India</h3>
+          <p class="text-sm text-ink/80 leading-relaxed"><span class="text-muted font-semibold">Problem.</span> Policing is reactive — hotspot maps look backward. Can we forecast crime so resources move <em>before</em> incidents pile up?</p>
+          <p class="text-sm text-ink/80 leading-relaxed"><span class="text-muted font-semibold">Approach.</span> Benchmarked Prophet, NeuralProphet &amp; LSTM across 6,336 records — 705 districts, 25 crime categories (2014–22) — then built a Crime Data Visualizer web app.</p>
+          <p class="text-sm font-semibold text-ball leading-relaxed">Result. LSTM won at 93.8% accuracy, generating 2023–25 district forecasts + a hotspot ranking system. Co-authored research paper (draft).</p>
+          <div class="flex gap-2.5 mt-auto pt-1">
+            <a href="https://github.com/Parvjain06/Predictive-Policing-in-India-Crime-Pattern-Forecasting" target="_blank" rel="noopener" class="btn-sec">GitHub</a>
+            <span class="inline-flex items-center gap-2 font-score text-[11px] text-muted border border-line rounded-full px-3 py-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-clay"></span>Paper · draft in progress
+            </span>
+          </div>
+        </article>
+
+        <!-- Dark patterns -->
+        <article class="bg-grassd border border-line rounded-3xl p-7 flex flex-col gap-4 lg:col-span-2 transition-all duration-200 hover:-translate-y-1.5 hover:border-ball/50 hover:shadow-xl hover:shadow-black/30">
+          <div class="flex items-center justify-between">
+            <span class="chip-ball">Behavioural Analytics</span>
+            <span class="font-score text-[11px] text-muted">213 respondents · 6 patterns</span>
+          </div>
+          <h3 class="font-display font-bold text-2xl">Dark Patterns in Food-Delivery Apps</h3>
+          <div class="grid sm:grid-cols-3 gap-4">
+            <p class="text-sm text-ink/80 leading-relaxed"><span class="text-muted font-semibold">Problem.</span> Do manipulative UX tricks on Zomato &amp; Swiggy — fake timers, hidden fees, pre-added items — actually make people overspend, and who's most vulnerable?</p>
+            <p class="text-sm text-ink/80 leading-relaxed"><span class="text-muted font-semibold">Approach.</span> Surveyed 213 people against 6 documented dark patterns, then ran real statistics: correlation, chi-square, ANOVA, logistic regression &amp; K-Means clustering.</p>
+            <p class="text-sm font-semibold text-ball leading-relaxed">Result. Segmented users into three behavioural clusters — "Easy Target," "Aware but Affected," and "Immune" — with manipulation exposure tracking unplanned spend.</p>
+          </div>
+          <div class="flex gap-2.5 mt-auto pt-1">
+            <a href="https://github.com/Parvjain06/dark-patterns-zomato-swiggy" target="_blank" rel="noopener" class="btn-sec">GitHub</a>
+            <a href="https://parvjain06.github.io/dark-patterns-zomato-swiggy/" target="_blank" rel="noopener" class="btn-ghost">Live dashboard</a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <div class="courtline my-2"></div>
+
+    <!-- CONTACT -->
+    <section id="contact" class="py-16 lg:py-24">
+      <div class="bg-grassd border border-line rounded-[2.5rem] p-8 sm:p-12 lg:p-16 relative overflow-hidden">
+        <span class="felt hidden sm:block absolute -right-10 -top-10 w-40 h-40 opacity-20"></span>
+        <div class="font-score text-xs tracking-widest text-ball mb-4">GAME · CONTACT</div>
+        <h2 class="font-display font-bold text-3xl sm:text-5xl mb-4">Let's talk data</h2>
+        <p class="text-ink/80 max-w-[52ch] mb-8 text-lg">
+          Open to internships, collaborations, and anyone with a weird dataset and a good question.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <a href="mailto:parvvvjj@gmail.com" class="inline-flex items-center gap-2 bg-ball hover:bg-balld text-grassd font-bold px-6 py-3.5 rounded-full no-underline transition-colors">Email me</a>
+          <a href="https://www.linkedin.com/in/parv-jain-836794379/" target="_blank" rel="noopener" class="btn-sec !px-6 !py-3.5">LinkedIn</a>
+          <a href="https://github.com/Parvjain06" target="_blank" rel="noopener" class="btn-sec !px-6 !py-3.5">GitHub</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-line">
+    <div class="max-w-[1180px] mx-auto px-5 sm:px-8 lg:px-12 py-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-muted">
+      <span class="font-score text-xs">© 2026 Parv Jain</span>
+      <span class="font-score text-xs">Built in code · not a template</span>
+    </div>
+  </footer>
+
+  <style>
+    .chip { font-family:'Inter'; font-weight:600; font-size:13px; background:#0b2015; border:1px solid rgba(255,255,255,.15); color:#edf7e9; padding:7px 14px; border-radius:999px; }
+    .chip-ball { font-family:'Space Mono'; font-size:11px; letter-spacing:.04em; background:rgba(212,255,51,.14); color:#d4ff33; padding:5px 12px; border-radius:999px; }
+    .chip-clay { font-family:'Space Mono'; font-size:11px; letter-spacing:.04em; background:rgba(224,122,69,.16); color:#e8a37e; padding:5px 12px; border-radius:999px; }
+    .btn-sec { display:inline-flex; align-items:center; gap:6px; border:1px solid rgba(255,255,255,.18); color:#edf7e9; font-weight:600; font-size:13px; padding:9px 16px; border-radius:999px; text-decoration:none; transition:border-color .2s; }
+    .btn-sec:hover { border-color:rgba(212,255,51,.6); }
+    .btn-ghost { display:inline-flex; align-items:center; gap:6px; color:#d4ff33; font-weight:600; font-size:13px; padding:9px 16px; border-radius:999px; text-decoration:none; transition:background .2s; }
+    .btn-ghost:hover { background:rgba(212,255,51,.1); }
+  </style>
+
+  <script>
+    // rolling tennis-ball scroll indicator
+    const ball = document.getElementById('ball');
+    const nav = document.getElementById('nav');
+    function onScroll() {
+      const h = document.documentElement;
+      const max = h.scrollHeight - h.clientHeight;
+      const pct = max > 0 ? h.scrollTop / max : 0;
+      if (ball) {
+        ball.style.marginLeft = `calc(${pct * 100}% - ${pct * 16}px)`;
+        ball.style.transform = `rotate(${pct * 1440}deg)`;
+      }
+      if (window.scrollY > 16) {
+        nav.classList.add('bg-grass/90','backdrop-blur-md','shadow-lg','shadow-black/20');
+      } else {
+        nav.classList.remove('bg-grass/90','backdrop-blur-md','shadow-lg','shadow-black/20');
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    onScroll();
+  </script>
+</body>
+</html>
