@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Out! — Page not found</title>
+<meta name="description" content="That page is outside the lines. Head back to Parv Jain's portfolio." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%23d4ff33'/%3E%3Cpath d='M4 7c6 4 6 14 0 18M28 7c-6 4-6 14 0 18' fill='none' stroke='%2310291b' stroke-width='2'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Inter:wght@400;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  :root { box-sizing: border-box; }
+  * { margin: 0; box-sizing: border-box; }
+  body {
+    min-height: 100vh; min-height: 100dvh;
+    background: #10291b; color: #edf7e9;
+    font-family: Inter, system-ui, sans-serif;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; gap: 18px; padding: 24px; overflow-x: hidden;
+  }
+  .ball { position: relative; width: 84px; height: 84px; border-radius: 999px; background: #d4ff33; animation: bounce 1.8s ease-in-out infinite; }
+  .ball::before, .ball::after { content:''; position:absolute; inset:0; border-radius:999px; border:3px solid rgba(16,41,27,.55); border-left-color:transparent; border-right-color:transparent; }
+  .ball::before { transform: rotate(28deg) scaleX(.55); }
+  .ball::after  { transform: rotate(-28deg) scaleX(.55); }
+  h1 { font-family: "Bricolage Grotesque", system-ui, sans-serif; font-weight: 800; font-size: clamp(3.5rem, 18vw, 7rem); line-height: .9; letter-spacing: -.02em; }
+  .eyebrow { font-family: "Space Mono", monospace; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: #d4ff33; }
+  p { color: #a2c1ad; font-size: 17px; max-width: 42ch; }
+  a.home { margin-top: 8px; display: inline-flex; align-items: center; gap: 8px; background: #d4ff33; color: #0b2015; font-weight: 700; text-decoration: none; padding: 13px 26px; border-radius: 999px; transition: background .2s; }
+  a.home:hover { background: #b6e01f; }
+  @keyframes bounce { 0%,100% { transform: translateY(0) scale(1,1); } 50% { transform: translateY(-22px) scale(1.05,.95); } }
+  @media (prefers-reduced-motion: reduce) { .ball { animation: none; } }
+</style>
+</head>
+<body>
+  <div class="ball" aria-hidden="true"></div>
+  <div class="eyebrow">Fault · 404</div>
+  <h1>Out!</h1>
+  <p>That page landed outside the lines — it doesn't exist (or moved). Let's get you back in play.</p>
+  <a class="home" href="/">Back to the baseline →</a>
+</body>
+</html>
