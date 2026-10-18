@@ -95,6 +95,8 @@
   
   .has-js .hero-seq { opacity: 0; transform: translateY(16px); }
   .has-js .loaded .hero-seq { opacity: 1; transform: none; transition: opacity .7s ease-out var(--d, 0ms), transform .7s cubic-bezier(.22,1,.36,1) var(--d, 0ms); }
+  .has-js .loaded .court-panel { transition: opacity .7s ease-out var(--d, 0ms), transform .7s cubic-bezier(.22,1,.36,1) var(--d, 0ms), box-shadow .25s ease, border-color .25s ease; }
+  .court-panel:hover { border-color: rgba(212,255,51,.45); box-shadow: 0 22px 48px -16px rgba(212,255,51,.4); }
   @media (prefers-reduced-motion: reduce) {
     .has-js .hero-seq { opacity: 1 !important; transform: none !important; }
   }
@@ -177,7 +179,7 @@
         </div>
       </div>
 
-      <div class="hero-seq bg-grassd/60 border border-line rounded-3xl p-5 sm:p-6 shadow-lg shadow-black/20 w-full max-w-[460px] lg:ml-auto flex flex-col" style="--d:560ms">
+      <div class="hero-seq court-panel bg-grassd/60 border border-line rounded-3xl p-5 sm:p-6 shadow-lg shadow-black/20 w-full max-w-[460px] lg:ml-auto flex flex-col" style="--d:560ms">
         <div class="flex items-center justify-between mb-3">
           <span class="font-score text-sm tracking-wider text-muted">MY COURTS</span>
           <span class="font-score text-xs text-muted">by project</span>
@@ -252,7 +254,7 @@
           <span class="text-ball font-semibold uppercase tracking-wide text-[0.9em]">rallies</span>: set it up, read the pattern, commit to the shot.
         </p>
       </div>
-      <div class="relative rounded-3xl aspect-[4/5] bg-grassd border-2 border-line p-2.5">
+      <div class="relative rounded-3xl aspect-[4/5] bg-grassd border-2 border-line p-2.5 transition-all duration-200 hover:-translate-y-1.5 hover:border-ball/40 hover:shadow-[0_18px_40px_-16px_rgba(212,255,51,0.35)]">
         <img src="parv-photo.jpg" alt="Parv Jain" class="w-full h-full rounded-2xl object-cover" />
         <span class="absolute -top-2 -left-2 w-5 h-5 border-t-2 border-l-2 border-ball rounded-tl-lg"></span>
         <span class="absolute -bottom-2 -right-2 w-5 h-5 border-b-2 border-r-2 border-ball rounded-br-lg"></span>
