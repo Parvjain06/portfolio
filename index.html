@@ -3,14 +3,22 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Parv Jain — Data Science</title>
-<meta name="description" content="Parv Jain — Data Science undergraduate at NMIMS Mumbai. Building end-to-end ML across NLP, time-series forecasting and behavioural analytics: SentIQ sentiment dashboard, crime forecasting, dark-pattern research and multi-agent LLM fairness." />
+<title>Parv Jain · Data Science</title>
+<meta name="description" content="Parv Jain · Data Science undergraduate at NMIMS Mumbai. Building end-to-end ML across NLP, time-series forecasting and behavioural analytics: SentIQ sentiment dashboard, crime forecasting, dark-pattern research and multi-agent LLM fairness." />
 <meta name="author" content="Parv Jain" />
+<meta name="theme-color" content="#10291b" />
 <!-- Open Graph / link preview -->
 <meta property="og:type" content="website" />
-<meta property="og:title" content="Parv Jain — Data Science" />
-<meta property="og:description" content="Data Science student turning messy data into decisions — NLP, forecasting, and behavioural analytics projects." />
-<meta name="twitter:card" content="summary" />
+<meta property="og:url" content="https://portfolio-livid-three-17.vercel.app/" />
+<meta property="og:title" content="Parv Jain · Data Science" />
+<meta property="og:description" content="Data Science student turning messy data into decisions: NLP, forecasting, and behavioural analytics projects." />
+<meta property="og:image" content="https://portfolio-livid-three-17.vercel.app/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Parv Jain · Data Science" />
+<meta name="twitter:description" content="Data Science student turning messy data into decisions: NLP, forecasting, and behavioural analytics projects." />
+<meta name="twitter:image" content="https://portfolio-livid-three-17.vercel.app/og-image.png" />
 <!-- inline tennis-ball favicon (no file needed) -->
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%23d4ff33'/%3E%3Cpath d='M4 7c6 4 6 14 0 18M28 7c-6 4-6 14 0 18' fill='none' stroke='%2310291b' stroke-width='2'/%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -39,7 +47,6 @@
           score:   ['"Space Mono"', 'ui-monospace', 'monospace'],
         },
         keyframes: {
-          bar:   { '0%,100%': { transform: 'scaleX(0.92)' }, '50%': { transform: 'scaleX(1)' } },
           dot:   { '0%,100%': { opacity: '1' }, '50%': { opacity: '0.25' } },
           serve: { '0%': { transform: 'translateY(0) rotate(0)' }, '30%': { transform: 'translateY(-10px) rotate(120deg)' }, '60%': { transform: 'translateY(0) rotate(240deg)' }, '100%': { transform: 'translateY(0) rotate(360deg)' } },
         },
@@ -84,7 +91,7 @@
   .lenis.lenis-smooth { scroll-behavior: auto !important; }
   .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
   .lenis.lenis-stopped { overflow: hidden; }
-  /* (3) hero load choreography — staggered reveal */
+  /* (3) hero load choreography: staggered reveal */
   .has-js .hero-seq { opacity: 0; transform: translateY(16px); }
   .has-js .loaded .hero-seq { opacity: 1; transform: none; transition: opacity .7s ease-out var(--d, 0ms), transform .7s cubic-bezier(.22,1,.36,1) var(--d, 0ms); }
   @media (prefers-reduced-motion: reduce) {
@@ -92,13 +99,10 @@
   }
   /* (1) active-section nav highlight */
   .nav-link.active { color: #d4ff33; }
-  /* scrolled nav: soft gradient fade for readability — no boxed bar / hard edge */
+  /* scrolled nav: soft gradient fade for readability, no boxed bar / hard edge */
   #nav.nav-scrolled { background: linear-gradient(to bottom, rgb(16 41 27 / .92) 55%, rgb(16 41 27 / 0)); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
-  /* scoreboard bars grow from 0 to their score */
-  .scorebar { width: 0; transition: width 1.1s cubic-bezier(.22,1,.36,1); }
   @media (prefers-reduced-motion: reduce) {
     .has-js .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
-    .scorebar { transition: none !important; }
   }
 </style>
 <script>document.documentElement.classList.add('has-js');</script>
@@ -114,15 +118,16 @@
   <!-- NAV -->
   <nav id="nav" class="sticky top-0 z-50">
     <div class="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12 flex items-center justify-between py-4 sm:py-5">
-      <button id="logo" type="button" aria-label="Parv — bounce the ball, start a rally" class="relative font-display font-extrabold text-2xl tracking-tight text-ink bg-transparent border-0 cursor-pointer p-0 leading-none">
+      <button id="logo" type="button" aria-label="Parv, bounce the ball, start a rally" class="relative font-display font-extrabold text-2xl tracking-tight text-ink bg-transparent border-0 cursor-pointer p-0 leading-none">
         Parv<span id="logo-ball" class="felt inline-block align-baseline ml-[1px]" style="width:.34em;height:.34em"></span>
         <span id="rally-pop" class="pointer-events-none absolute left-full top-0 ml-2 whitespace-nowrap font-score text-[11px] text-ball opacity-0"></span>
       </button>
       <div class="flex items-center gap-4 sm:gap-7">
-        <a href="#about"    class="nav-link hidden sm:inline text-muted hover:text-ink font-semibold text-[15px] no-underline transition-colors">About</a>
-        <a href="#skills"   class="nav-link hidden sm:inline text-muted hover:text-ink font-semibold text-[15px] no-underline transition-colors">Skills</a>
-        <a href="#projects" class="nav-link hidden sm:inline text-muted hover:text-ink font-semibold text-[15px] no-underline transition-colors">Projects</a>
-        <a href="#contact"  class="nav-link hidden sm:inline text-muted hover:text-ink font-semibold text-[15px] no-underline transition-colors">Contact</a>
+        <a href="#about"      class="nav-link hidden sm:inline text-muted hover:text-ink font-semibold text-[15px] no-underline transition-colors">About</a>
+        <a href="#skills"     class="nav-link hidden sm:inline text-muted hover:text-ink font-semibold text-[15px] no-underline transition-colors">Skills</a>
+        <a href="#experience" class="nav-link hidden sm:inline text-muted hover:text-ink font-semibold text-[15px] no-underline transition-colors">Experience</a>
+        <a href="#projects"   class="nav-link hidden sm:inline text-muted hover:text-ink font-semibold text-[15px] no-underline transition-colors">Projects</a>
+        <a href="#contact"    class="nav-link hidden sm:inline text-muted hover:text-ink font-semibold text-[15px] no-underline transition-colors">Contact</a>
         <a href="Parv_Jain_CV.pdf" target="_blank" rel="noopener" class="hidden sm:inline-flex items-center gap-2 bg-ball hover:bg-balld text-grassd font-bold text-[15px] px-5 py-2.5 rounded-full no-underline transition-colors">Résumé</a>
         <!-- mobile hamburger -->
         <button id="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" class="sm:hidden inline-flex flex-col justify-center gap-[5px] w-10 h-10 items-center rounded-lg border border-line">
@@ -136,8 +141,9 @@
     <div id="mobile-menu" class="sm:hidden hidden border-t border-line bg-grass/95 backdrop-blur-md">
       <div class="max-w-[1280px] mx-auto px-5 py-3 flex flex-col">
         <a href="#about"    class="mobile-link py-3 text-ink font-semibold no-underline border-b border-line/50">About</a>
-        <a href="#skills"   class="mobile-link py-3 text-ink font-semibold no-underline border-b border-line/50">Skills</a>
-        <a href="#projects" class="mobile-link py-3 text-ink font-semibold no-underline border-b border-line/50">Projects</a>
+        <a href="#skills"     class="mobile-link py-3 text-ink font-semibold no-underline border-b border-line/50">Skills</a>
+        <a href="#experience" class="mobile-link py-3 text-ink font-semibold no-underline border-b border-line/50">Experience</a>
+        <a href="#projects"   class="mobile-link py-3 text-ink font-semibold no-underline border-b border-line/50">Projects</a>
         <a href="#contact"  class="mobile-link py-3 text-ink font-semibold no-underline border-b border-line/50">Contact</a>
         <a href="Parv_Jain_CV.pdf" target="_blank" rel="noopener" class="mt-3 inline-flex items-center justify-center gap-2 bg-ball text-grassd font-bold px-4 py-2.5 rounded-full no-underline">Résumé</a>
       </div>
@@ -156,13 +162,13 @@
         <p class="hero-seq font-score text-sm text-muted mb-3" style="--d:80ms">Data Science Student · NMIMS Mumbai</p>
         <h1 id="hero-name" class="hero-seq font-display font-extrabold text-[clamp(3rem,13vw,8.5rem)] leading-[0.92] tracking-tight mb-4 break-words" style="--d:160ms">Parv Jain</h1>
         <p class="hero-seq font-display font-bold text-2xl sm:text-3xl text-ball mb-6 flex items-center gap-3" style="--d:260ms">
-          Serving data science
+          Serving Data Science
           <span class="felt inline-block w-5 h-5 align-middle animate-serve"></span>
         </p>
         <p class="hero-seq text-lg sm:text-xl leading-relaxed text-ink/90 max-w-[48ch] mb-9" style="--d:360ms">
-          Raw data is useless until you can turn it into decisions. I build end-to-end
-          machine-learning systems — from crime forecasting to sentiment engines — that
-          answer the question a dashboard actually gets asked: <span class="text-ball font-semibold">so what do we do now?</span>
+          I turn messy, real-world data into things people can actually use: models,
+          dashboards, decisions. I care less about chasing accuracy scores and more about
+          answering the question every dashboard eventually gets asked: <span class="font-display font-bold italic text-ball text-[1.15em]">“So what do we do now?”</span>
         </p>
         <div class="hero-seq flex flex-wrap gap-3" style="--d:460ms">
           <a href="#projects" class="inline-flex items-center gap-2 bg-ball hover:bg-balld text-grassd font-bold px-6 py-3.5 rounded-full no-underline transition-colors">See the work</a>
@@ -182,7 +188,7 @@
             <style>
               .cl { stroke: rgba(255,255,255,.55); stroke-width: 2; fill: none; }
               .lbl { font-family: 'Space Mono', monospace; font-size: 14px; font-weight: 700; text-anchor: middle; pointer-events: none; }
-              .sub { font-family: 'Space Mono', monospace; font-size: 10.5px; text-anchor: middle; fill: rgba(237,247,233,.6); letter-spacing: .04em; pointer-events: none; }
+              .sub { font-family: 'Space Mono', monospace; font-size: 10.5px; text-anchor: middle; fill: rgba(237,247,233,.74); letter-spacing: .04em; pointer-events: none; }
               .zone { fill: transparent; cursor: pointer; transition: fill .2s; }
               .zone:hover, .zone:focus-visible { fill: rgba(255,255,255,.07); outline: none; }
               #court-ball { transition: cx .45s cubic-bezier(.22,1,.36,1), cy .45s cubic-bezier(.22,1,.36,1); }
@@ -216,10 +222,10 @@
           <!-- serve marker -->
           <circle id="court-ball" cx="150" cy="30" r="4.5" fill="#d4ff33"/>
           <!-- clickable zones → jump to each project -->
-          <rect class="zone" x="62"  y="104" width="88" height="86" data-target="#p-nlp"       data-cx="106" data-cy="147" role="link" tabindex="0" aria-label="Go to NLP project — SentIQ"></rect>
-          <rect class="zone" x="150" y="104" width="88" height="86" data-target="#p-forecast"  data-cx="194" data-cy="147" role="link" tabindex="0" aria-label="Go to Forecasting project — Predictive Policing"></rect>
-          <rect class="zone" x="62"  y="190" width="88" height="86" data-target="#p-behaviour" data-cx="106" data-cy="233" role="link" tabindex="0" aria-label="Go to Behaviour project — Dark Patterns"></rect>
-          <rect class="zone" x="150" y="190" width="88" height="86" data-target="#p-research"  data-cx="194" data-cy="233" role="link" tabindex="0" aria-label="Go to Research project — Multi-agent LLMs"></rect>
+          <rect class="zone" x="62"  y="104" width="88" height="86" data-target="#p-nlp"       data-cx="106" data-cy="147" role="link" tabindex="0" aria-label="Go to NLP project: SentIQ"></rect>
+          <rect class="zone" x="150" y="104" width="88" height="86" data-target="#p-forecast"  data-cx="194" data-cy="147" role="link" tabindex="0" aria-label="Go to Forecasting project: Predictive Policing"></rect>
+          <rect class="zone" x="62"  y="190" width="88" height="86" data-target="#p-behaviour" data-cx="106" data-cy="233" role="link" tabindex="0" aria-label="Go to Behaviour project: Dark Patterns"></rect>
+          <rect class="zone" x="150" y="190" width="88" height="86" data-target="#p-research"  data-cx="194" data-cy="233" role="link" tabindex="0" aria-label="Go to Research project: Multi-agent LLMs"></rect>
         </svg>
         </div>
         <div class="courtline my-3"></div>
@@ -235,15 +241,15 @@
         <div class="font-score text-xs tracking-widest text-ball mb-4">15 · ABOUT</div>
         <h2 class="font-display font-bold text-3xl sm:text-5xl mb-5">The player behind the model</h2>
         <p class="text-[17px] leading-relaxed text-ink/85 max-w-[64ch] mb-4">
-          I'm a Data Science undergraduate at NMIMS Mumbai (CGPA 9.18) with hands-on work
-          across NLP, time-series forecasting, and full-stack ML deployment. I like building
-          the whole pipeline — from training the model to the dashboard someone actually
-          clicks around in — and I care less about chasing accuracy scores than about the
-          moment a messy spreadsheet becomes a decision someone can act on.
+          I'm a Data Science undergraduate at NMIMS Mumbai (CGPA 3.68/4) with hands-on work
+          across <span class="text-ball font-semibold uppercase tracking-wide text-[0.9em]">NLP</span>, <span class="text-ball font-semibold uppercase tracking-wide text-[0.9em]">time-series forecasting</span>, and <span class="text-ball font-semibold uppercase tracking-wide text-[0.9em]">full-stack ML deployment</span>. I like building
+          the whole pipeline, from training the model to the dashboard someone actually
+          clicks around in, and I care less about chasing accuracy scores than about the
+          moment a messy spreadsheet becomes <span class="text-ball font-semibold uppercase tracking-wide text-[0.9em]">a decision someone can act on</span>.
         </p>
         <p class="text-[17px] leading-relaxed text-ink/85 max-w-[64ch]">
-          Off the screen, I play tennis — which is probably why I think about problems as
-          rallies: set it up, read the pattern, commit to the shot.
+          Off the screen, I play tennis, which is probably why I think about problems as
+          <span class="text-ball font-semibold uppercase tracking-wide text-[0.9em]">rallies</span>: set it up, read the pattern, commit to the shot.
         </p>
       </div>
       <div class="relative rounded-3xl aspect-[4/5] bg-grassd border-2 border-line p-2.5">
@@ -257,25 +263,89 @@
 
     <!-- SKILLS -->
     <section id="skills" class="reveal py-16 lg:py-20">
+      <style>
+        .sk-legend{display:flex;flex-wrap:wrap;gap:1rem 1.5rem;margin-bottom:2.25rem}
+        .sk-leg{display:flex;align-items:center;gap:.55rem;font-size:13px;color:#9fb0a0;letter-spacing:.02em}
+        .sk-card{background:rgba(11,32,21,.6);border:1px solid var(--line,rgba(255,255,255,.08));border-radius:1rem;padding:1.4rem 1.5rem}
+        .sk-list{display:flex;flex-direction:column;gap:.7rem;margin-top:1rem}
+        .sk-item{display:flex;align-items:center;gap:.65rem;font-size:15px;color:rgba(237,242,233,.9)}
+        .sk-dot{width:11px;height:11px;border-radius:50%;flex:none;box-sizing:border-box}
+        .sk-played{background:#d4ff33;box-shadow:0 0 0 3px rgba(212,255,51,.14)}
+        .sk-prac{border:2px solid #d4ff33;background:transparent}
+        .sk-watch{border:2px dashed #7f8f72;background:transparent}
+      </style>
       <div class="font-score text-xs tracking-widest text-ball mb-4">30 · SKILLS</div>
-      <h2 class="font-display font-bold text-3xl sm:text-5xl mb-10">What's in the kit bag</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-        <div>
-          <h3 class="font-display font-bold text-lg mb-4">Languages</h3>
-          <div class="flex flex-wrap gap-2"><span class="chip">Python</span><span class="chip">SQL</span><span class="chip">JavaScript</span></div>
+      <h2 class="font-display font-bold text-3xl sm:text-5xl mb-6">What's in the kit bag</h2>
+      <div class="sk-legend">
+        <span class="sk-leg"><span class="sk-dot sk-played"></span>Played this court</span>
+        <span class="sk-leg"><span class="sk-dot sk-prac"></span>Practiced this court</span>
+        <span class="sk-leg"><span class="sk-dot sk-watch"></span>Watched from the stands</span>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="sk-card">
+          <h3 class="font-display font-bold text-lg">Languages</h3>
+          <div class="sk-list">
+            <span class="sk-item"><span class="sk-dot sk-played"></span>Python</span>
+            <span class="sk-item"><span class="sk-dot sk-prac"></span>SQL</span>
+            <span class="sk-item"><span class="sk-dot sk-prac"></span>JavaScript</span>
+            <span class="sk-item"><span class="sk-dot sk-played"></span>HTML / CSS</span>
+          </div>
         </div>
-        <div>
-          <h3 class="font-display font-bold text-lg mb-4">ML / Deep Learning</h3>
-          <div class="flex flex-wrap gap-2"><span class="chip">PyTorch</span><span class="chip">scikit-learn</span><span class="chip">Hugging Face</span><span class="chip">RoBERTa</span><span class="chip">DeBERTa</span><span class="chip">LSTM</span></div>
+        <div class="sk-card">
+          <h3 class="font-display font-bold text-lg">ML &amp; NLP</h3>
+          <div class="sk-list">
+            <span class="sk-item"><span class="sk-dot sk-played"></span>PyTorch</span>
+            <span class="sk-item"><span class="sk-dot sk-played"></span>scikit-learn</span>
+            <span class="sk-item"><span class="sk-dot sk-played"></span>RoBERTa / DeBERTa</span>
+            <span class="sk-item"><span class="sk-dot sk-played"></span>LSTM / Prophet</span>
+            <span class="sk-item"><span class="sk-dot sk-played"></span>Groq / LLaMA</span>
+            <span class="sk-item"><span class="sk-dot sk-watch"></span>LangChain / RAG</span>
+          </div>
         </div>
-        <div>
-          <h3 class="font-display font-bold text-lg mb-4">Data &amp; Viz</h3>
-          <div class="flex flex-wrap gap-2"><span class="chip">pandas</span><span class="chip">NumPy</span><span class="chip">Matplotlib</span><span class="chip">Seaborn</span><span class="chip">Plotly</span><span class="chip">Power BI</span><span class="chip">Tableau</span></div>
+        <div class="sk-card">
+          <h3 class="font-display font-bold text-lg">Data &amp; Viz</h3>
+          <div class="sk-list">
+            <span class="sk-item"><span class="sk-dot sk-played"></span>pandas / NumPy</span>
+            <span class="sk-item"><span class="sk-dot sk-played"></span>Statistical testing</span>
+            <span class="sk-item"><span class="sk-dot sk-played"></span>Matplotlib / Seaborn</span>
+            <span class="sk-item"><span class="sk-dot sk-played"></span>Plotly</span>
+            <span class="sk-item"><span class="sk-dot sk-prac"></span>Power BI</span>
+            <span class="sk-item"><span class="sk-dot sk-prac"></span>Tableau</span>
+          </div>
         </div>
-        <div>
-          <h3 class="font-display font-bold text-lg mb-4">Web &amp; Tools</h3>
-          <div class="flex flex-wrap gap-2"><span class="chip">React</span><span class="chip">Flask</span><span class="chip">Streamlit</span><span class="chip">Git</span><span class="chip">Jupyter</span><span class="chip">Groq / LLaMA</span></div>
+        <div class="sk-card">
+          <h3 class="font-display font-bold text-lg">Web &amp; Deployment</h3>
+          <div class="sk-list">
+            <span class="sk-item"><span class="sk-dot sk-played"></span>Git / GitHub</span>
+            <span class="sk-item"><span class="sk-dot sk-played"></span>Render / Streamlit Cloud</span>
+            <span class="sk-item"><span class="sk-dot sk-prac"></span>PostgreSQL</span>
+            <span class="sk-item"><span class="sk-dot sk-prac"></span>Flask / React</span>
+            <span class="sk-item"><span class="sk-dot sk-watch"></span>Docker</span>
+          </div>
         </div>
+      </div>
+    </section>
+
+    <div class="courtline my-2"></div>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="reveal scroll-mt-28 py-16 lg:py-20">
+      <div class="font-score text-xs tracking-widest text-ball mb-4">40 · EXPERIENCE</div>
+      <h2 class="font-display font-bold text-3xl sm:text-5xl mb-10">On the circuit</h2>
+      <div class="bg-grassd border border-line rounded-3xl p-7 flex flex-col gap-3 border-t-[3px]" style="border-top-color:#d4ff33">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <h3 class="font-display font-bold text-2xl">Data Analyst Intern</h3>
+          <span class="font-score text-xs text-muted">Jun 2025</span>
+        </div>
+        <p class="font-score text-xs tracking-wide text-ball">SMILE FOUNDATION · NGO · 2025</p>
+        <p class="text-[15px] text-ink/70 leading-relaxed">
+          My first real taste of data work outside the classroom: turning an NGO's messy program data into decisions.
+        </p>
+        <ul class="flex flex-col gap-2.5 text-sm text-ink/80 leading-relaxed mt-1">
+          <li class="flex gap-2.5"><span class="text-ball select-none">·</span><span>Led an education &amp; community-development project end to end, from planning through execution, with <span class="text-ball font-semibold uppercase tracking-wide text-[0.9em]">cross-functional teams</span>.</span></li>
+          <li class="flex gap-2.5"><span class="text-ball select-none">·</span><span>Tracked program <span class="text-ball font-semibold uppercase tracking-wide text-[0.9em]">KPIs</span> and turned the analysis into <span class="text-ball font-semibold uppercase tracking-wide text-[0.9em]">insights stakeholders could act on</span>.</span></li>
+          <li class="flex gap-2.5"><span class="text-ball select-none">·</span><span>Owned reporting and documentation, keeping stakeholders aligned throughout.</span></li>
+        </ul>
       </div>
     </section>
 
@@ -283,38 +353,38 @@
 
     <!-- PROJECTS -->
     <section id="projects" class="reveal py-16 lg:py-20">
-      <div class="font-score text-xs tracking-widest text-ball mb-4">40 · PROJECTS</div>
+      <div class="font-score text-xs tracking-widest text-ball mb-4">DEUCE · PROJECTS</div>
       <h2 class="font-display font-bold text-3xl sm:text-5xl mb-3">Things I've built</h2>
-      <p class="font-score text-[13px] text-muted mb-8">Each project plays on its own court — <span style="color:#86bf4e">NLP</span> · <span style="color:#d07a45">Forecasting</span> · <span style="color:#4f93c9">Behaviour</span> · <span style="color:#a98cd9">Research</span>.</p>
+      <p class="font-score text-[13px] text-muted mb-8">Each project plays on its own court: <span style="color:#86bf4e">NLP</span> · <span style="color:#d07a45">Forecasting</span> · <span style="color:#4f93c9">Behaviour</span> · <span style="color:#a98cd9">Research</span>.</p>
 
       <div id="project-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
-        <!-- SentIQ — grass -->
-        <article id="p-nlp" class="surf-card scroll-mt-28 bg-grassd rounded-3xl p-7 flex flex-col gap-4 transition-all duration-200 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-black/30" style="--surf:#86bf4e">
-          <div class="flex items-center justify-between">
+        <!-- SentIQ : grass -->
+        <article id="p-nlp" class="surf-card scroll-mt-28 bg-grassd rounded-3xl p-7 flex flex-col gap-4 transition-all duration-200 hover:-translate-y-1.5" style="--surf:#86bf4e">
+          <div class="flex items-start justify-between gap-3">
             <span class="surf-tag">NLP · Dashboard</span>
-            <span class="font-score text-[11px] text-ball font-bold">87.6% · 0.88 F1</span>
+            <span class="stat-chip"><span class="stat-num">87.6<span class="stat-unit">%</span></span><span class="stat-cap">accuracy · 0.88 F1</span></span>
           </div>
-          <h3 class="font-display font-bold text-2xl">SentIQ — AI Market Research Dashboard</h3>
+          <h3 class="font-display font-bold text-2xl">SentIQ: AI Market Research Dashboard</h3>
           <p class="text-sm text-ink/80 leading-relaxed"><span class="text-muted font-semibold">Problem.</span> Thousands of chaotic customer reviews are worthless until a business can act on them.</p>
-          <p class="text-sm text-ink/80 leading-relaxed"><span class="text-muted font-semibold">Approach.</span> A model showdown (SVM vs BERT vs RoBERTa) + aspect-based sentiment with DeBERTa-v3, and a Groq-powered LLaMA 3.3 70B assistant that writes grounded executive summaries. Built in Streamlit.</p>
-          <p class="text-sm font-semibold text-ball leading-relaxed">Result. RoBERTa won at 87.6% accuracy; ships one-click AI reports, aspect breakdowns, and side-by-side model charts.</p>
+          <p class="text-sm text-ink/80 leading-relaxed"><span class="text-muted font-semibold">Approach.</span> A model showdown (SVM vs BERT vs RoBERTa) + <span class="text-ball font-semibold">aspect-based sentiment with DeBERTa-v3</span>, and a Groq-powered LLaMA 3.3 70B assistant that writes grounded executive summaries. Built in Streamlit.</p>
+          <p class="text-sm text-ink/80 leading-relaxed"><span class="text-muted font-semibold">Result.</span> RoBERTa won at <span class="text-ball font-semibold uppercase tracking-wide text-[0.9em]">87.6% accuracy</span>; ships one-click AI reports, aspect breakdowns, and side-by-side model charts.</p>
           <div class="flex gap-2.5 mt-auto pt-1">
             <a href="https://github.com/Parvjain06/ai-market-research-dashboard" target="_blank" rel="noopener" class="btn-sec">GitHub</a>
             <a href="https://ai-market-research-dashboard-hju8skkacvqfxv3n8k8ddy.streamlit.app/" target="_blank" rel="noopener" class="btn-ghost">Live dashboard</a>
           </div>
         </article>
 
-        <!-- Crime — clay -->
-        <article id="p-forecast" class="surf-card scroll-mt-28 bg-grassd rounded-3xl p-7 flex flex-col gap-4 transition-all duration-200 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-black/30" style="--surf:#d07a45">
-          <div class="flex items-center justify-between">
-            <span class="surf-tag">Time-Series · Research</span>
-            <span class="font-score text-[11px] text-ball font-bold">93.8% · LSTM</span>
+        <!-- Crime : clay -->
+        <article id="p-forecast" class="surf-card scroll-mt-28 bg-grassd rounded-3xl p-7 flex flex-col gap-4 transition-all duration-200 hover:-translate-y-1.5" style="--surf:#d07a45">
+          <div class="flex items-start justify-between gap-3">
+            <span class="surf-tag">Time-Series · Forecasting</span>
+            <span class="stat-chip"><span class="stat-num">93.8<span class="stat-unit">%</span></span><span class="stat-cap">LSTM accuracy</span></span>
           </div>
           <h3 class="font-display font-bold text-2xl">Predictive Policing in India</h3>
-          <p class="text-sm text-ink/80 leading-relaxed"><span class="text-muted font-semibold">Problem.</span> Policing is reactive — hotspot maps look backward. Can we forecast crime so resources move <em>before</em> incidents pile up?</p>
-          <p class="text-sm text-ink/80 leading-relaxed"><span class="text-muted font-semibold">Approach.</span> Benchmarked Prophet, NeuralProphet &amp; LSTM across 6,336 records — 705 districts, 25 crime categories (2014–22) — then built a Crime Data Visualizer web app.</p>
-          <p class="text-sm font-semibold text-ball leading-relaxed">Result. LSTM won at 93.8% accuracy, generating 2023–25 district forecasts + a hotspot ranking system. Co-authored research paper (draft).</p>
+          <p class="text-sm text-ink/80 leading-relaxed"><span class="text-muted font-semibold">Problem.</span> Policing is reactive: hotspot maps look backward. Can we forecast crime so resources move <em>before</em> incidents pile up?</p>
+          <p class="text-sm text-ink/80 leading-relaxed"><span class="text-muted font-semibold">Approach.</span> Benchmarked Prophet, NeuralProphet &amp; LSTM across <span class="text-ball font-semibold">9 years of government data (705 districts, 25 crime categories)</span>, then built a Crime Data Visualizer web app.</p>
+          <p class="text-sm text-ink/80 leading-relaxed"><span class="text-muted font-semibold">Result.</span> LSTM won at <span class="text-ball font-semibold uppercase tracking-wide text-[0.9em]">93.8% accuracy</span>, generating 2023–25 district forecasts + a hotspot ranking system. Co-authored research paper (draft).</p>
           <div class="flex gap-2.5 mt-auto pt-1">
             <a href="https://github.com/Parvjain06/Predictive-Policing-in-India-Crime-Pattern-Forecasting" target="_blank" rel="noopener" class="btn-sec">GitHub</a>
             <span class="inline-flex items-center gap-2 font-score text-[11px] text-muted border border-line rounded-full px-3 py-2">
@@ -323,17 +393,17 @@
           </div>
         </article>
 
-        <!-- Dark patterns — hard court -->
-        <article id="p-behaviour" class="surf-card scroll-mt-28 bg-grassd rounded-3xl p-7 flex flex-col gap-4 lg:col-span-2 transition-all duration-200 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-black/30" style="--surf:#4f93c9">
-          <div class="flex items-center justify-between">
+        <!-- Dark patterns : hard court -->
+        <article id="p-behaviour" class="surf-card scroll-mt-28 bg-grassd rounded-3xl p-7 flex flex-col gap-4 lg:col-span-2 transition-all duration-200 hover:-translate-y-1.5" style="--surf:#4f93c9">
+          <div class="flex items-start justify-between gap-3">
             <span class="surf-tag">Behavioural Analytics</span>
-            <span class="font-score text-[11px] text-muted">213 respondents · 6 patterns</span>
+            <span class="stat-chip"><span class="stat-num">219</span><span class="stat-cap">respondents · 6 patterns</span></span>
           </div>
           <h3 class="font-display font-bold text-2xl">Dark Patterns in Food-Delivery Apps</h3>
           <div class="grid sm:grid-cols-3 gap-4">
-            <p class="text-sm text-ink/80 leading-relaxed"><span class="text-muted font-semibold">Problem.</span> Do manipulative UX tricks on Zomato &amp; Swiggy — fake timers, hidden fees, pre-added items — actually make people overspend, and who's most vulnerable?</p>
-            <p class="text-sm text-ink/80 leading-relaxed"><span class="text-muted font-semibold">Approach.</span> Surveyed 213 people against 6 documented dark patterns, then ran real statistics: correlation, chi-square, ANOVA, logistic regression &amp; K-Means clustering.</p>
-            <p class="text-sm font-semibold text-ball leading-relaxed">Result. Segmented users into three behavioural clusters — "Easy Target," "Aware but Affected," and "Immune" — with manipulation exposure tracking unplanned spend.</p>
+            <p class="text-sm text-ink/80 leading-relaxed"><span class="text-muted font-semibold">Problem.</span> Do manipulative UX tricks on Zomato &amp; Swiggy (fake timers, hidden fees, pre-added items) actually make people overspend, and who's most vulnerable?</p>
+            <p class="text-sm text-ink/80 leading-relaxed"><span class="text-muted font-semibold">Approach.</span> Surveyed 219 people against 6 documented dark patterns, then ran real statistics: <span class="text-ball font-semibold">correlation, chi-square, ANOVA, logistic regression &amp; K-Means clustering</span>.</p>
+            <p class="text-sm text-ink/80 leading-relaxed"><span class="text-muted font-semibold">Result.</span> Found a significant link between manipulation exposure and unplanned spend (<span class="text-ball font-semibold">r = 0.38, p &lt; 0.001</span>); the most-targeted users overspent by <span class="text-ball font-semibold uppercase tracking-wide text-[0.9em]">~69%</span> on average. K-Means surfaced three types: "Easy Target," "Aware but Affected," and "Immune."</p>
           </div>
           <div class="flex gap-2.5 mt-auto pt-1">
             <a href="https://github.com/Parvjain06/dark-patterns-zomato-swiggy" target="_blank" rel="noopener" class="btn-sec">GitHub</a>
@@ -341,8 +411,8 @@
           </div>
         </article>
 
-        <!-- In-progress research project — indoor -->
-        <article id="p-research" class="surf-card scroll-mt-28 bg-grassd rounded-3xl p-7 flex flex-col gap-4 lg:col-span-2 transition-all duration-200 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-black/30" style="--surf:#a98cd9">
+        <!-- In-progress research project : indoor -->
+        <article id="p-research" class="surf-card scroll-mt-28 bg-grassd rounded-3xl p-7 flex flex-col gap-4 lg:col-span-2 transition-all duration-200 hover:-translate-y-1.5" style="--surf:#a98cd9">
           <div class="flex items-center justify-between">
             <span class="surf-tag">Multi-Agent LLMs · Team research</span>
             <span class="inline-flex items-center gap-2 font-score text-[11px] text-muted border border-line rounded-full px-3 py-1.5">
@@ -351,15 +421,15 @@
           </div>
           <h3 class="font-display font-bold text-2xl">Counterfactual Debiasing in Multi-Agent LLM Systems</h3>
           <div class="grid sm:grid-cols-3 gap-4">
-            <p class="text-sm text-ink/80 leading-relaxed"><span class="text-muted font-semibold">Problem.</span> Teams of AI agents are being proposed to make high-stakes calls like loan approvals — but research shows their debate can <em>amplify</em> demographic bias by up to 10×, and no fix exists that's built for the multi-agent setting.</p>
-            <p class="text-sm text-ink/80 leading-relaxed"><span class="text-muted font-semibold">Approach.</span> Building and benchmarking debate-time fixes — most centrally a counterfactual "Devil's Advocate" agent that re-argues each case with gender/age flipped and flags bias before the verdict — against single-agent and unmitigated baselines on the German Credit &amp; Adult Income datasets.</p>
+            <p class="text-sm text-ink/80 leading-relaxed"><span class="text-muted font-semibold">Problem.</span> Teams of AI agents are being proposed to make high-stakes calls like loan approvals, but research shows their debate can <em>amplify</em> demographic bias by up to 10×, and no fix exists that's built for the multi-agent setting.</p>
+            <p class="text-sm text-ink/80 leading-relaxed"><span class="text-muted font-semibold">Approach.</span> Building and benchmarking debate-time fixes (most centrally a <span class="text-ball font-semibold">counterfactual "Devil's Advocate" agent</span> that re-argues each case with gender/age flipped and flags bias before the verdict) against single-agent and unmitigated baselines on the German Credit &amp; Adult Income datasets.</p>
             <p class="text-sm text-ink/80 leading-relaxed"><span class="text-muted font-semibold">Where it's at.</span> Implementing the baseline debate pipeline and three mitigation conditions now, measuring approval-rate disparity and counterfactual flip-rate. Aiming for a Scopus-indexed IEEE/Springer conference.</p>
           </div>
           <div class="flex flex-wrap items-center justify-between gap-3 mt-auto pt-1">
             <span class="inline-flex items-center gap-2 font-score text-[11px] text-muted border border-line rounded-full px-3 py-2">
               <span class="w-1.5 h-1.5 rounded-full bg-clay"></span>Active research · in progress
             </span>
-            <span class="text-sm text-ball font-semibold">Still building this — ideas and suggestions welcome.</span>
+            <span class="text-sm text-ball font-semibold">Still building this. Ideas and suggestions welcome.</span>
           </div>
         </article>
 
@@ -370,16 +440,36 @@
 
     <!-- CONTACT -->
     <section id="contact" class="reveal py-16 lg:py-24">
-      <div class="bg-grassd border border-line rounded-[2.5rem] p-8 sm:p-12 lg:p-16 relative overflow-hidden transition-all duration-200 hover:-translate-y-1.5 hover:border-ball/50 hover:shadow-xl hover:shadow-black/30">
-        <div class="font-score text-xs tracking-widest text-ball mb-4">GAME · CONTACT</div>
-        <h2 class="font-display font-bold text-3xl sm:text-5xl mb-4">Let's talk data</h2>
-        <p class="text-ink/80 max-w-[52ch] mb-8 text-lg">
-          Open to internships, collaborations, and anyone with a weird dataset and a good question.
-        </p>
-        <div class="flex flex-wrap gap-3">
-          <a href="mailto:parvvvjj@gmail.com" class="inline-flex items-center gap-2 bg-ball hover:bg-balld text-grassd font-bold px-6 py-3.5 rounded-full no-underline transition-colors">Email me</a>
-          <a href="https://www.linkedin.com/in/parv-jain-836794379/" target="_blank" rel="noopener" class="btn-sec !px-6 !py-3.5">LinkedIn</a>
-          <a href="https://github.com/Parvjain06" target="_blank" rel="noopener" class="btn-sec !px-6 !py-3.5">GitHub</a>
+      <div class="contact-card bg-grassd border border-line rounded-[2.5rem] p-8 sm:p-12 lg:p-16 relative overflow-hidden transition-all duration-200 hover:-translate-y-1.5 hover:border-ball/50 hover:shadow-[0_22px_48px_-16px_rgba(212,255,51,0.35)]">
+        <!-- PLAY 5: faint court motif in the corner -->
+        <svg aria-hidden="true" focusable="false" class="absolute right-[-2.5rem] bottom-[-3rem] w-64 h-64 opacity-[0.07] pointer-events-none z-0" viewBox="0 0 100 100" fill="none" stroke="#d4ff33" stroke-width="1.3" stroke-linejoin="round">
+          <rect x="10" y="6" width="80" height="88" rx="1"/>
+          <line x1="10" y1="50" x2="90" y2="50"/>
+          <rect x="24" y="28" width="52" height="44"/>
+          <line x1="50" y1="28" x2="50" y2="72"/>
+          <line x1="50" y1="6" x2="50" y2="14"/>
+          <line x1="50" y1="86" x2="50" y2="94"/>
+        </svg>
+        <div class="relative z-10">
+          <!-- PLAY 1: availability status chip -->
+          <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+            <div class="font-score text-xs tracking-widest text-ball">GAME · CONTACT</div>
+            <span class="inline-flex items-center gap-2 font-score text-[11px] text-ball border border-ball/30 rounded-full px-3 py-1.5" style="background:rgba(212,255,51,.08)">
+              <span class="w-1.5 h-1.5 rounded-full bg-ball animate-dot"></span>Open to internships · 2026
+            </span>
+          </div>
+          <h2 class="font-display font-bold text-3xl sm:text-5xl mb-4">Let's talk data</h2>
+          <!-- PLAY 3: green highlight in the pitch -->
+          <p class="text-ink/80 max-w-[52ch] mb-3 text-lg">
+            Open to internships, collaborations, and anyone with <span class="text-ball font-semibold uppercase tracking-wide text-[0.9em]">a weird dataset and a good question</span>.
+          </p>
+          <!-- PLAY 2: tennis closing line -->
+          <p class="font-display font-bold italic text-ball text-2xl mb-8">Your serve.</p>
+          <div class="flex flex-wrap gap-3">
+            <a href="mailto:parvvvjj@gmail.com" class="inline-flex items-center gap-2 bg-ball hover:bg-balld text-grassd font-bold px-6 py-3.5 rounded-full no-underline transition-colors">Email me</a>
+            <a href="https://www.linkedin.com/in/parv-jain-836794379/" target="_blank" rel="noopener" class="btn-sec !px-6 !py-3.5">LinkedIn</a>
+            <a href="https://github.com/Parvjain06" target="_blank" rel="noopener" class="btn-sec !px-6 !py-3.5">GitHub</a>
+          </div>
         </div>
       </div>
     </section>
@@ -398,16 +488,13 @@
         <a href="mailto:parvvvjj@gmail.com" class="text-muted hover:text-ball text-sm font-semibold no-underline transition-colors">Email</a>
       </div>
       <div class="flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-muted border-t border-line/60 pt-5">
-        <span class="font-score text-xs">© <span id="year">2026</span> Parv Jain</span>
-        <span class="font-score text-xs">Built in code · not a template</span>
+        <span class="font-score text-[15px] inline-flex items-center gap-1.5"><span style="font-size:1.35em; line-height:1; display:inline-block; transform:translateY(0.19em);">©</span><span><span id="year">2026</span> Parv Jain</span></span>
+        <span class="font-score text-[15px]">Built in code · won on court</span>
       </div>
     </div>
   </footer>
 
   <style>
-    .chip { font-family:'Inter'; font-weight:600; font-size:13px; background:#0b2015; border:1px solid rgba(255,255,255,.15); color:#edf7e9; padding:7px 14px; border-radius:999px; }
-    .chip-ball { font-family:'Space Mono'; font-size:11px; letter-spacing:.04em; background:rgba(212,255,51,.14); color:#d4ff33; padding:5px 12px; border-radius:999px; }
-    .chip-clay { font-family:'Space Mono'; font-size:11px; letter-spacing:.04em; background:rgba(224,122,69,.16); color:#e8a37e; padding:5px 12px; border-radius:999px; }
     .btn-sec { display:inline-flex; align-items:center; gap:6px; border:1px solid rgba(255,255,255,.18); color:#edf7e9; font-weight:600; font-size:13px; padding:9px 16px; border-radius:999px; text-decoration:none; transition:border-color .2s; }
     .btn-sec:hover { border-color:rgba(212,255,51,.6); }
     .btn-ghost { display:inline-flex; align-items:center; gap:6px; color:#d4ff33; font-weight:600; font-size:13px; padding:9px 16px; border-radius:999px; text-decoration:none; transition:background .2s; }
@@ -420,6 +507,17 @@
     /* flash a project card when arrived via the court */
     @keyframes cardFlash { 0%{ box-shadow:0 0 0 0 color-mix(in srgb, var(--surf) 70%, transparent); } 100%{ box-shadow:0 0 0 6px transparent; } }
     .card-flash { animation: cardFlash 1s ease-out; border-top-color: var(--surf) !important; }
+    /* PLAY 1: court-colour wash at the top of each card */
+    .surf-card { position:relative; }
+    .surf-card::before { content:''; position:absolute; inset:0 0 auto 0; height:110px; border-radius:1.5rem 1.5rem 0 0; background:linear-gradient(to bottom, color-mix(in srgb, var(--surf) 13%, transparent), transparent); pointer-events:none; z-index:0; }
+    .surf-card > * { position:relative; z-index:1; }
+    /* PLAY 3: hover glow picks up the court colour */
+    .surf-card:hover { box-shadow:0 22px 48px -16px color-mix(in srgb, var(--surf) 50%, transparent); }
+    /* PLAY 2: scoreboard stat */
+    .stat-chip { display:flex; flex-direction:column; align-items:flex-end; line-height:1; }
+    .stat-num { font-family:'Space Mono'; font-weight:700; font-size:1.9rem; color:#d4ff33; letter-spacing:-.01em; }
+    .stat-unit { font-size:1rem; }
+    .stat-cap { font-family:'Space Mono'; font-size:10px; letter-spacing:.05em; text-transform:uppercase; color:#aec0b0; margin-top:5px; }
     /* logo tennis-ball bounce + rally pop */
     @keyframes logoBoing {
       0% { transform: translateY(0) scale(1,1); }
@@ -457,22 +555,6 @@
 
     // ----- scroll animations -----
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    // count a number up from 0 to its target
-    function countUp(el) {
-      const to = parseFloat(el.dataset.to);
-      const dec = parseInt(el.dataset.dec || '0', 10);
-      if (reduce) { el.textContent = to.toFixed(dec); return; }
-      const dur = 1100; const start = performance.now();
-      function tick(now) {
-        const p = Math.min((now - start) / dur, 1);
-        const eased = 1 - Math.pow(1 - p, 3); // ease-out
-        el.textContent = (to * eased).toFixed(dec);
-        if (p < 1) requestAnimationFrame(tick);
-        else el.textContent = to.toFixed(dec);
-      }
-      requestAnimationFrame(tick);
-    }
 
     // reveal sections as they scroll into view
     if ('IntersectionObserver' in window) {
@@ -518,7 +600,7 @@
         pop.classList.add('show');
         clearTimeout(hideT); clearTimeout(resetT);
         hideT = setTimeout(() => pop.classList.remove('show'), 1100);
-        // rally "ends" if you stop clicking — like a real point
+        // rally "ends" if you stop clicking, like a real point
         resetT = setTimeout(() => { streak = 0; }, 1600);
         // still behave like a logo: tap scrolls to top
         if (window.__lenis) window.__lenis.scrollTo(0);
@@ -567,7 +649,7 @@
       if (!links.length || !('IntersectionObserver' in window)) return;
       const map = {};
       links.forEach(l => { map[l.getAttribute('href')] = l; });
-      const sections = ['#about', '#skills', '#projects', '#contact']
+      const sections = ['#about', '#skills', '#experience', '#projects', '#contact']
         .map(id => document.querySelector(id)).filter(Boolean);
       const spy = new IntersectionObserver(entries => {
         entries.forEach(e => {
