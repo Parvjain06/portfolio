@@ -266,7 +266,8 @@
       <style>
         .sk-legend{display:flex;flex-wrap:wrap;gap:1rem 1.5rem;margin-bottom:2.25rem}
         .sk-leg{display:flex;align-items:center;gap:.55rem;font-size:13px;color:#9fb0a0;letter-spacing:.02em}
-        .sk-card{background:rgba(11,32,21,.6);border:1px solid var(--line,rgba(255,255,255,.08));border-radius:1rem;padding:1.4rem 1.5rem}
+        .sk-card{background:rgba(11,32,21,.6);border:1px solid var(--line,rgba(255,255,255,.08));border-radius:1rem;padding:1.4rem 1.5rem;transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease}
+        .sk-card:hover{transform:translateY(-4px);border-color:rgba(212,255,51,.35);box-shadow:0 18px 40px -16px rgba(212,255,51,.30)}
         .sk-list{display:flex;flex-direction:column;gap:.7rem;margin-top:1rem}
         .sk-item{display:flex;align-items:center;gap:.65rem;font-size:15px;color:rgba(237,242,233,.9)}
         .sk-dot{width:11px;height:11px;border-radius:50%;flex:none;box-sizing:border-box}
@@ -361,7 +362,7 @@
 
         <!-- SentIQ : grass -->
         <article id="p-nlp" class="surf-card scroll-mt-28 bg-grassd rounded-3xl p-7 flex flex-col gap-4 transition-all duration-200 hover:-translate-y-1.5" style="--surf:#86bf4e">
-          <div class="flex items-start justify-between gap-3">
+          <div class="flex flex-wrap items-start justify-between gap-3">
             <span class="surf-tag">NLP · Dashboard</span>
             <span class="stat-chip"><span class="stat-num">87.6<span class="stat-unit">%</span></span><span class="stat-cap">accuracy · 0.88 F1</span></span>
           </div>
@@ -377,7 +378,7 @@
 
         <!-- Crime : clay -->
         <article id="p-forecast" class="surf-card scroll-mt-28 bg-grassd rounded-3xl p-7 flex flex-col gap-4 transition-all duration-200 hover:-translate-y-1.5" style="--surf:#d07a45">
-          <div class="flex items-start justify-between gap-3">
+          <div class="flex flex-wrap items-start justify-between gap-3">
             <span class="surf-tag">Time-Series · Forecasting</span>
             <span class="stat-chip"><span class="stat-num">93.8<span class="stat-unit">%</span></span><span class="stat-cap">LSTM accuracy</span></span>
           </div>
@@ -395,7 +396,7 @@
 
         <!-- Dark patterns : hard court -->
         <article id="p-behaviour" class="surf-card scroll-mt-28 bg-grassd rounded-3xl p-7 flex flex-col gap-4 lg:col-span-2 transition-all duration-200 hover:-translate-y-1.5" style="--surf:#4f93c9">
-          <div class="flex items-start justify-between gap-3">
+          <div class="flex flex-wrap items-start justify-between gap-3">
             <span class="surf-tag">Behavioural Analytics</span>
             <span class="stat-chip"><span class="stat-num">219</span><span class="stat-cap">respondents · 6 patterns</span></span>
           </div>
@@ -413,7 +414,7 @@
 
         <!-- In-progress research project : indoor -->
         <article id="p-research" class="surf-card scroll-mt-28 bg-grassd rounded-3xl p-7 flex flex-col gap-4 lg:col-span-2 transition-all duration-200 hover:-translate-y-1.5" style="--surf:#a98cd9">
-          <div class="flex items-center justify-between">
+          <div class="flex flex-wrap items-center justify-between gap-3">
             <span class="surf-tag">Multi-Agent LLMs · Team research</span>
             <span class="inline-flex items-center gap-2 font-score text-[11px] text-muted border border-line rounded-full px-3 py-1.5">
               <span class="w-1.5 h-1.5 rounded-full bg-clay animate-dot"></span>In progress
